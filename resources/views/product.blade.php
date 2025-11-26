@@ -50,27 +50,23 @@
 
 <!-- Content Section -->
 <div class="container mt-5">
-    <div class="row g-4">
-
-        <div class="col-md-4">
-            <h4 class="section-title">Column 1</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur excepturi eaque!</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <h4 class="section-title">Our Products</h4>
+                <p>Explore our wide range of products designed to meet your needs. From the latest gadgets to essential accessories, we have it all.</p>
+                <p>Browse through our catalog and find the perfect product for you.</p>
+            </div>
+            <div class="col-md-4">
+                <h4 class="section-title">Featured Items</h4>
+                <p>Check out our featured items that are trending this season. These products have been handpicked for their quality and popularity.</p>
+                <p>Don't miss out on exclusive deals and offers available for a limited time.</p>
+            </div>
+            <div class="col-md-4">
+                <h4 class="section-title">Customer Favorites</h4>
+                <p>Discover the products that our customers love the most. Read reviews and ratings to help you make an informed decision.</p>
+                <p>Join our community of satisfied customers today!</p>
+            </div>
         </div>
-
-        <div class="col-md-4">
-            <h4 class="section-title">Column 2</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur excepturi eaque!</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-        </div>
-
-        <div class="col-md-4">
-            <h4 class="section-title">Column 3</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur excepturi eaque!</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-        </div>
-
-    </div>
 </div>
 
 </body>
