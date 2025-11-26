@@ -21,3 +21,5 @@ Route::get('/home', function () {
     return view('home');
 
 });
+// Route::get('/', [PagesController::class, 'index']);
+// Route::get('/about', [PagesController::class, 'about']);
