@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\dashboardController;
+use App\Http\Controllers\Backend\employeeController;
 
 
 /*
@@ -14,6 +15,12 @@ use App\Http\Controllers\Backend\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+	Route::controller(DashboardController::class)->group(function () {
+		Route::get('/', 'index')->name('dashboard.index');
+	});
+
+	Route::controller(EmployeeController::class)->group(function () {
+		Route::get('/employee', 'index')->name('employee.index');
+	});
 
 
