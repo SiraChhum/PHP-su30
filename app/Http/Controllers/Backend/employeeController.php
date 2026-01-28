@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class employeeController extends Controller
+class EmployeeController
 {
     public function index()
     {
-        return view('Backend.employee.index');
+        return view('backend.employee.index');
     }
 }
