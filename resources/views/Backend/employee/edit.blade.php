@@ -1,4 +1,3 @@
-employee current
 @extends('backend.layouts.master')
 @section('emp_menu-open','menu-open')
 @section('emp_active','active')
@@ -14,7 +13,7 @@ employee current
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/employee')}}">Home</a></li>
                         <li class="breadcrumb-item active">Employee</li>
                     </ol>
                 </div>
@@ -38,16 +37,16 @@ employee current
                     <div class="card-header" style="background-color: #007bff;">
                         <h3 class="card-title"><i class="fas fa-user-plus"></i> {{ isset($employee) ? 'Edit Employee' : 'Add New Employee' }}</h3>
                     </div>
-                    
+
                     <div class="card-body">
                         {{-- Photo Upload Section --}}
                         <div class="text-center mb-4">
                             <label for="profile_photo" class="d-block">Profile Photo</label>
                             <div class="image-preview-container mb-2">
-                                <img id="preview" 
-                                     src="{{ (isset($employee) && $employee->profile_photo) ? asset('storage/' . $employee->profile_photo) : asset('dist/img/avatar5.png') }}" 
-                                     alt="Profile Photo" 
-                                     class="img-circle elevation-2" 
+                                <img id="preview"
+                                     src="{{ (isset($employee) && $employee->profile_photo) ? asset('storage/' . $employee->profile_photo) : asset('dist/img/avatar5.png') }}"
+                                     alt="Profile Photo"
+                                     class="img-circle elevation-2"
                                      style="width: 120px; height: 120px; object-fit: cover; border: 2px solid #adb5bd;">
                             </div>
                             <div class="custom-file" style="max-width: 250px; margin: 0 auto;">
@@ -60,51 +59,33 @@ employee current
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label>Full Name</label>
-                                <input type="text" name="full_name" class="form-control @error('full_name') is-invalid @enderror" placeholder="Full name" value="{{ $employee->full_name ?? '' }}" required>
-                                @error('full_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" name="full_name" class="form-control" placeholder="Full name" value="{{ $employee->full_name ?? '' }}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ $employee->email ?? '' }}" required>
-                                @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $employee->email ?? '' }}">
                             </div>
 
                             <div class="col-md-4 form-group">
                                 <label>Gender</label>
-                                <select name="gender" class="form-control @error('gender') is-invalid @enderror" required>
+                                <select name="gender" class="form-control">
                                     <option value="">-- Select Gender --</option>
                                     <option value="male" {{ (isset($employee) && $employee->gender == 'male') ? 'selected' : '' }}>Male</option>
                                     <option value="female" {{ (isset($employee) && $employee->gender == 'female') ? 'selected' : '' }}>Female</option>
                                 </select>
-                                @error('gender')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="col-md-4 form-group">
                                 <label>DOB</label>
-                                <input type="date" name="dob" class="form-control @error('dob') is-invalid @enderror" value="{{ $employee->dob ?? '' }}" required>
-                                @error('dob')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="date" name="dob" class="form-control" value="{{ $employee->dob ?? '' }}">
                             </div>
                             <div class="col-md-4 form-group">
                                 <label>Hire Date</label>
-                                <input type="date" name="hire_date" class="form-control @error('hire_date') is-invalid @enderror" value="{{ $employee->hire_date ?? date('Y-m-d') }}" required>
-                                @error('hire_date')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="date" name="hire_date" class="form-control" value="{{ $employee->hire_date ?? date('Y-m-d') }}">
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label>National ID</label>
-                                <input type="text" name="national_id" class="form-control @error('national_id') is-invalid @enderror" placeholder="National ID" value="{{ $employee->national_id ?? '' }}" required>
-                                @error('national_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" name="national_id" class="form-control" placeholder="National ID" value="{{ $employee->national_id ?? '' }}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Phone</label>
@@ -134,7 +115,7 @@ employee current
 
                             <div class="col-md-6 form-group">
                                 <label>Department</label>
-                                <select name="department_id" class="form-control @error('department_id') is-invalid @enderror" required>
+                                <select name="department_id" class="form-control">
                                     <option value="">-- Select Department --</option>
                                     @forelse($departments ?? [] as $department)
                                         <option value="{{ $department->department_id }}" {{ (isset($employee) && $employee->department_id == $department->department_id) ? 'selected' : '' }}>
@@ -144,9 +125,6 @@ employee current
                                         <option disabled>No departments available</option>
                                     @endforelse
                                 </select>
-                                @error('department_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Position</label>
@@ -190,7 +168,7 @@ employee current
                 document.getElementById('preview').src = e.target.result;
             }
             reader.readAsDataURL(input.files[0]);
-            
+
             // Update the label text with the file name
             var fileName = input.files[0].name;
             var label = input.nextElementSibling;

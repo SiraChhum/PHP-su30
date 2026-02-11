@@ -1,28 +1,22 @@
 @extends('backend.layouts.master')
-@section('emp_menu-open','menu-open')
-@section('emp_active','active')
-@section('title','Employees')
-
+@section('posi_menu-open','menu-open')
+@section('posi_active','active')
+@section('title','Positions')
 @section('main-content')
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Employees</h1>
-          </div>
-          <div class="col-sm-6">
+            <h1 class="m-0">Positions</h1>
+          </div><div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">
-                <a href="{{url('/employee/create')}}"><i class="fas fa-plus-circle"></i> Add Employee</a>
+                <a href="{{url('/position/create')}}"><i class="fas fa-plus-circle"></i> Add Position</a>
               </li>
             </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-
+          </div></div></div></div>
     <section class="content">
       <div class="container-fluid">
 
@@ -48,68 +42,61 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Employee List Table</h3>
+                <h3 class="card-title">Position List Table</h3>
               </div>
               <div class="card-body">
                 <table class="table table-striped table-bordered table-hover">
                   <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>Photo</th> {{-- Added this column header --}}
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>Position Title</th>
+                        <th>Description</th>
+                        <th>Level</th>
                         <th>Department</th>
-                        <th>Position</th>
-                        <th>Status</th>
+                        <th>Managerial</th>
                         <th style="width: 200px">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                      @if ($employees->isEmpty())
+                      @if ($positions->isEmpty())
                           <tr>
-                              <td colspan="9" class="py-5 text-center"> {{-- Increased colspan to 9 --}}
+                              <td colspan="7" class="py-5 text-center">
                                   <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
-                                  <p class="text-danger fw-bold">No employees found.</p>
+                                  <p class="text-danger fw-bold">No positions found.</p>
                               </td>
                           </tr>
                       @else
-                          @foreach ($employees as $key => $value)
+                          @foreach ($positions as $key => $value)
                               <tr>
+                                  {{-- Dynamic Indexing for Pagination --}}
                                   <td class="align-middle text-center">
-                                    {{ ($employees->currentPage() - 1) * $employees->perPage() + $loop->iteration }}
+                                    {{ ($positions->currentPage() - 1) * $positions->perPage() + $loop->iteration }}
                                   </td>
-
-                                    {{-- Photo Column --}}
-                                    <td class="align-middle text-center">
-                                      @if($value->profile_photo)
-                                        <img src="{{ asset('storage/' . $value->profile_photo) }}" class="img-circle elevation-2" alt="User Image" style="width: 40px; height: 40px; object-fit: cover;">
-                                      @else
-                                        <img src="{{ asset('assets/dist/img/user1-128x128.jpg') }}" class="img-circle elevation-2" alt="Default Image" style="width: 40px; height: 40px;">
-                                      @endif
-                                    </td>
-
-                                  <td class="align-middle"><strong>{{ $value->full_name }}</strong></td>
-                                  <td class="align-middle">{{ $value->email }}</td>
-                                  <td class="align-middle">{{ $value->phone_number ?? 'N/A' }}</td>
+                                  <td class="align-middle"><strong>{{ $value->position_title }}</strong></td>
+                                  <td class="align-middle">{{ $value->description ?? 'N/A' }}</td>
+                                  <td class="align-middle">{{ $value->level ?? 'N/A' }}</td>
                                   <td class="align-middle">{{ $value->department->department_name ?? 'N/A' }}</td>
-                                  <td class="align-middle">{{ $value->position->position_title ?? 'N/A' }}</td>
                                   <td class="align-middle">
-                                      @if($value->status == 'active')
-                                          <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i> Active</span>
+                                      @if($value->is_managerial)
+                                          <span class="badge bg-success">Yes</span>
                                       @else
-                                          <span class="badge bg-secondary"><i class="fas fa-times-circle me-1"></i> Inactive</span>
+                                          <span class="badge bg-secondary">No</span>
                                       @endif
                                   </td>
                                   <td class="align-middle">
                                       <div class="btn-group" role="group">
-                                          <a href="{{ url('/employee/show/'.$value->employee_id) }}" class="btn btn-outline-info">
+                                          {{-- View Button --}}
+                                          <a href="{{ url('/position/show/'.$value->position_id) }}" class="btn btn-outline-info">
                                               <i class="fas fa-eye"></i>
                                           </a>
-                                          <a href="{{ url('/employee/edit/'.$value->employee_id) }}" class="btn btn-outline-primary">
-                                              <i class="fas fa-edit"></i>
-                                          </a>
-                                          <a href="{{ url('/employee/delete/'.$value->employee_id) }}" class="btn btn-outline-danger" onclick="return confirm('Are you sure?')">
+
+                                          {{-- Edit Button --}}
+                                            <a href="{{ url('/position/edit/'.$value->position_id) }}" class="btn btn-outline-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                          {{-- Delete Button with Form --}}
+                                          <a href="{{ url('/position/delete/'.$value->position_id) }}" class="btn btn-outline-danger">
                                               <i class="fas fa-trash-alt"></i>
                                           </a>
                                       </div>
@@ -122,13 +109,13 @@
               </div>
               <div class="card-footer clearfix">
                 <div class="float-right">
-                    {{ $employees->links('pagination::bootstrap-4') }}
+                    {{-- Laravel Pagination Links --}}
+                    {{ $positions->links('pagination::bootstrap-4') }}
                 </div>
               </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-    </section>
+      </div></section>
   </div>
 @endsection
