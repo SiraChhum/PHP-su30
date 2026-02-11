@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','Add ')
+@section('title','Department')
 @section('e_menu-open','menu-open')
 @section('e_active','active')
 

@@ -14,7 +14,7 @@
           <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Mann Senghun</a>
+          <a href="#" class="d-block">Chhum Sira</a>
         </div>
       </div>
 
@@ -107,7 +107,7 @@
               </li>
             </ul>
           </li>
-          
+
           <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">

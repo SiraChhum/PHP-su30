@@ -15,8 +15,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Department</li>
+              <a href="{{url('/department/create')}}" class="btn btn-outline-primary">
+                <i class="fas fa-plus-circle"></i>Add Department</a>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -42,8 +42,8 @@
                       <th>DepartmentCode</th>
                       <th>DepartmentName</th>
                       <th>Description</th>
-                      <th>Status</th>
-                      <th>Action</th>
+                      <th class="text-center">Status</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -52,7 +52,7 @@
                         <td colspan="6" class="text-danger text-center">No Departments Found!</td>
                       </tr>
                     @else
-                        
+
                         @foreach($departments as $key => $value)
                           <tr>
                             <td>{{++$key}}</td>
@@ -60,14 +60,14 @@
                             <td>{{$value->department_name}}</td>
                             <td>{{$value->department_description}}</td>
                             <td>
-                                <span class="badge {{ $value->department_status == 'Active' ? 'bg-success' : 'bg-danger' }}">
-                                    {{ $value->department_status }}
-                                </span>
+                                <buttom type="buttom" class="btn btn-block btn-{{$value->department_status == 'active' ? 'success' : 'danger' }} btn-sm">
+                                    {{ucfirst($value->department_status)}}
+                                </buttom>
                             </td>
-                            <td>
-                                <a href="#" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-outline-info"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="btn btn-outline-primary"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
                             </td>
                         @endforeach
                     @endif
